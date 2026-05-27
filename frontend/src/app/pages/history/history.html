@@ -1,0 +1,83 @@
+<div class="history-page">
+  <div class="topbar">
+    <div class="title-section">
+      <h1>Upload History</h1>
+      <p>Track previous image and video detections for {{ username }}</p>
+    </div>
+
+    <div class="top-actions">
+      <button class="dashboard-btn" (click)="goToDashboard()">Dashboard</button>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-left">
+      <h2>Detection Records</h2>
+      <p>
+        View all uploaded files, processed outputs, and detection decisions
+        saved in the system.
+      </p>
+    </div>
+
+    <div class="summary-right">
+      <div class="mini-stat">
+        <span>Total Uploads</span>
+        <strong>{{ uploads.length }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="state-card" *ngIf="loading">
+    <p>Loading upload history...</p>
+  </div>
+
+  <div class="state-card error" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div class="state-card" *ngIf="!loading && !errorMessage && uploads.length === 0">
+    <p>No upload history found yet.</p>
+  </div>
+
+  <div class="history-grid" *ngIf="!loading && uploads.length > 0">
+    <div class="history-card" *ngFor="let item of uploads">
+      <div class="card-header">
+        <div>
+          <h3>{{ item.file_name }}</h3>
+          <p>{{ item.file_type | titlecase }}</p>
+        </div>
+        <span class="date-badge">{{ item.created_at }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Detection Result</span>
+        <span class="value">{{ item.detection_result }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Original Path</span>
+        <span class="value">{{ item.original_path }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Output Path</span>
+        <span class="value">{{ item.output_path }}</span>
+      </div>
+
+      <div class="preview-wrapper" *ngIf="item.output_path">
+        <img
+          *ngIf="isImage(item.file_type)"
+          [src]="getFileUrl(item.output_path)"
+          alt="Processed output"
+        />
+
+        <video
+          *ngIf="isVideo(item.file_type)"
+          [src]="getFileUrl(item.output_path)"
+          controls
+        ></video>
+      </div>
+    </div>
+  </div>
+</div>

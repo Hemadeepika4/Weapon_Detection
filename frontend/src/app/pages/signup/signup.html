@@ -1,0 +1,95 @@
+<div class="auth-shell">
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
+
+  <div class="auth-layout">
+    <div class="auth-left">
+      <div class="brand-chip">Secure Registration</div>
+      <h1>Create Your<br />Account</h1>
+      <p>
+        Join the platform to access intelligent weapon detection, upload
+        analysis, threat monitoring, and future live camera alerts.
+      </p>
+    </div>
+
+    <div class="auth-right">
+      <div class="auth-card">
+        <div class="card-shine"></div>
+
+        <div class="card-top">
+          <span class="mini-badge">Sign Up</span>
+          <h2>Get Started</h2>
+          <p>Create your account to access the system</p>
+        </div>
+
+        <form (ngSubmit)="onSignup()" class="auth-form">
+          <div class="form-group">
+            <label>Username</label>
+            <div class="input-box">
+              <span class="input-icon">👤</span>
+              <input
+                type="text"
+                [(ngModel)]="username"
+                name="username"
+                placeholder="Enter your username"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <div class="input-box">
+              <span class="input-icon">✉</span>
+              <input
+                type="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="Enter your email"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-box">
+              <span class="input-icon">🔒</span>
+              <input
+                type="password"
+                [(ngModel)]="password"
+                name="password"
+                placeholder="Enter your password"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <div class="input-box">
+              <span class="input-icon">🔐</span>
+              <input
+                type="password"
+                [(ngModel)]="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm your password"
+              />
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="loading" class="auth-btn">
+            {{ loading ? 'Creating Account...' : 'Create Account' }}
+          </button>
+
+          <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+          <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+        </form>
+
+        <div class="auth-footer">
+          <span>Already have an account?</span>
+          <a routerLink="/">Login here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

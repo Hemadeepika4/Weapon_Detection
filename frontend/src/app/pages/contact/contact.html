@@ -1,0 +1,53 @@
+<div class="contact-page">
+  <div class="page-navbar">
+    <div class="nav-brand" routerLink="/home">
+      <div class="nav-icon">🛡️</div>
+      <div class="brand-text">
+        <h2>Weapon Detection AI</h2>
+        <p>YOLOv12 Security Monitoring System</p>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <button routerLink="/home">Home</button>
+      <button routerLink="/dashboard">Detection</button>
+      <button routerLink="/about">About</button>
+      <button routerLink="/contact">Contact</button>
+      <button class="logout-nav-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h1>Contact Us</h1>
+    <p>Feel free to reach out for any queries regarding the project.</p>
+
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>Email</h3>
+        <p>velagahema@gmail.com</p>
+      </div>
+
+      <div class="contact-box">
+        <h3>Phone</h3>
+        <p>+91 XXXXXXXXXXX</p>
+      </div>
+
+      <div class="contact-box">
+        <h3>Location</h3>
+        <p>India</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2>Send a Message</h2>
+
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea placeholder="Your Message"></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>

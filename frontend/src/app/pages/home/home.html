@@ -1,0 +1,133 @@
+<div class="home-page">
+  <div class="page-navbar">
+    <div class="nav-brand" routerLink="/home">
+      <div class="nav-icon">🛡️</div>
+      <div class="brand-text">
+        <h2>Weapon Detection AI</h2>
+        <p>YOLOv12 Security Monitoring System</p>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <button routerLink="/home">Home</button>
+      <button routerLink="/dashboard">Detection</button>
+      <button routerLink="/about">About</button>
+      <button routerLink="/contact">Contact</button>
+      <button class="logout-nav-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="hero-section">
+    <div class="hero-left">
+      <div class="hero-badge">AI Powered Surveillance</div>
+
+      <h1>Real-Time Weapon Detection System</h1>
+
+      <p>
+        An intelligent security platform for detecting weapons in images, videos,
+        and live camera input using YOLOv12 with adaptive confidence filtering
+        and threat-based analysis.
+      </p>
+
+      <div class="hero-actions">
+        <button class="hero-btn primary-btn" (click)="goToDetection()">Go to Detection</button>
+        <button class="hero-btn secondary-btn" (click)="goToAbout()">Learn More</button>
+      </div>
+
+      <div class="mini-stats">
+        <div class="mini-card">
+          <h3>YOLOv12</h3>
+          <span>Detection Engine</span>
+        </div>
+
+        <div class="mini-card">
+          <h3>Adaptive</h3>
+          <span>Confidence Filtering</span>
+        </div>
+
+        <div class="mini-card">
+          <h3>Live</h3>
+          <span>Camera Monitoring</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-feature blue-box">Image Detection</div>
+      <div class="hero-feature cyan-box">Video Analysis</div>
+      <div class="hero-feature orange-box">Threat Alerts</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-heading">
+      <h2>Core Features</h2>
+      <p>Designed for intelligent monitoring and security-based threat detection</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <h3>Image Detection</h3>
+        <p>Upload images and detect suspicious weapon objects with confidence and threat level results.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎥</div>
+        <h3>Video Detection</h3>
+        <p>Analyze uploaded videos frame by frame and produce processed output with detection details.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📷</div>
+        <h3>Live Camera Detection</h3>
+        <p>Use webcam input for real-time weapon detection and fast security monitoring.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚠️</div>
+        <h3>Threat Analysis</h3>
+        <p>Classify detections into threat levels using adaptive confidence-based decision rules.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-heading">
+      <h2>System Workflow</h2>
+      <p>Simple and effective processing pipeline for intelligent weapon detection</p>
+    </div>
+
+    <div class="workflow-grid">
+      <div class="workflow-card">
+        <div class="step-circle">1</div>
+        <h3>Input Media</h3>
+        <p>Upload image, video, or use live camera stream.</p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="step-circle">2</div>
+        <h3>YOLOv12 Detection</h3>
+        <p>Model identifies possible weapon objects from media input.</p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="step-circle">3</div>
+        <h3>Adaptive Filtering</h3>
+        <p>Confidence thresholds refine detections for better reliability.</p>
+      </div>
+
+      <div class="workflow-card">
+        <div class="step-circle">4</div>
+        <h3>Threat Output</h3>
+        <p>System displays result, confidence, and threat level analysis.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card cta-card">
+    <h2>Ready to Explore the System?</h2>
+    <p>Move to the detection dashboard and test the project with your own inputs.</p>
+    <button class="hero-btn primary-btn" (click)="goToDetection()">Start Detection</button>
+  </div>
+</div>

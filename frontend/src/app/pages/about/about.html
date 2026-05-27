@@ -1,0 +1,72 @@
+<div class="about-page">
+  <div class="page-navbar">
+    <div class="nav-brand" routerLink="/home">
+      <div class="nav-icon">🛡️</div>
+      <div class="brand-text">
+        <h2>Weapon Detection AI</h2>
+        <p>YOLOv12 Security Monitoring System</p>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <button routerLink="/home">Home</button>
+      <button routerLink="/dashboard">Detection</button>
+      <button routerLink="/about">About</button>
+      <button routerLink="/contact">Contact</button>
+      <button class="logout-nav-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h1>About the Project</h1>
+
+    <p>
+      This project is a real-time weapon detection system designed using
+      YOLOv12 and adaptive confidence filtering techniques.
+    </p>
+
+    <p>
+      It aims to improve surveillance by detecting weapons in images, videos,
+      and live camera feeds with high accuracy and reliability.
+    </p>
+  </div>
+
+  <div class="section-card">
+    <h2>Project Objectives</h2>
+
+    <div class="about-grid">
+      <div class="about-box">
+        <h3>Accurate Detection</h3>
+        <p>Identify weapons such as guns and knives with high precision.</p>
+      </div>
+
+      <div class="about-box">
+        <h3>Real-Time Monitoring</h3>
+        <p>Enable live camera detection for continuous surveillance.</p>
+      </div>
+
+      <div class="about-box">
+        <h3>Adaptive Filtering</h3>
+        <p>Reduce false positives using confidence-based filtering.</p>
+      </div>
+
+      <div class="about-box">
+        <h3>Threat Classification</h3>
+        <p>Classify results into LOW, MEDIUM, HIGH, VERY HIGH.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2>Technology Used</h2>
+
+    <div class="tech-grid">
+      <div class="tech-box">Angular</div>
+      <div class="tech-box">Flask</div>
+      <div class="tech-box">YOLOv12</div>
+      <div class="tech-box">PyTorch</div>
+      <div class="tech-box">OpenCV</div>
+      <div class="tech-box">NumPy</div>
+    </div>
+  </div>
+</div>

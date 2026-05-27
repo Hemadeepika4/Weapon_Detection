@@ -1,0 +1,204 @@
+<div class="dashboard-page">
+
+  <div class="page-navbar">
+    <div class="nav-brand" routerLink="/home">
+      <div class="nav-icon">🛡️</div>
+      <div class="brand-text">
+        <h2>Weapon Detection AI</h2>
+        <p>YOLOv12 Security Monitoring System</p>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <button routerLink="/home">Home</button>
+      <button routerLink="/dashboard">Detection</button>
+      <button routerLink="/about">About</button>
+      <button routerLink="/contact">Contact</button>
+      <button class="logout-nav-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="center-alert-overlay" *ngIf="showAlert">
+    <div class="center-alert-box">
+      <div class="center-alert-header">
+        <h2>{{ alertTitle }}</h2>
+        <button class="close-btn" (click)="closeAlert()">✕</button>
+      </div>
+
+      <p class="alert-message">{{ alertMessage }}</p>
+
+      <div class="alert-actions">
+        <button (click)="closeAlert()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <div class="hero-left">
+      <p class="welcome-text">Welcome back,</p>
+      <h2>{{ username }}</h2>
+      <p class="hero-desc">
+        Monitor uploaded media, run detection on images and videos,
+        and view confidence-based threat analysis.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="status-card">
+        <h3>System Status</h3>
+        <div class="status-row"><span>Backend</span><strong>Connected</strong></div>
+        <div class="status-row"><span>Frontend</span><strong>Running</strong></div>
+        <div class="status-row"><span>Auth</span><strong>Active</strong></div>
+        <div class="status-row"><span>Camera</span><strong>{{ cameraStarted ? 'On' : 'Off' }}</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-grid">
+
+    <div class="upload-card">
+      <div class="card-head">
+        <div class="card-icon">🖼️</div>
+        <div>
+          <h3>Image Detection</h3>
+          <p>Upload image for weapon detection</p>
+        </div>
+      </div>
+
+      <label class="custom-file-btn">
+        Choose Image
+        <input type="file" accept="image/*" (change)="onImageSelected($event)" hidden>
+      </label>
+
+      <div class="preview-box" *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="Selected image">
+      </div>
+
+      <button class="action-btn" (click)="detectImage()" [disabled]="imageLoading">
+        {{ imageLoading ? 'Processing...' : 'Detect Image' }}
+      </button>
+
+      <p class="error-text" *ngIf="imageError">{{ imageError }}</p>
+
+      <div class="result-box" *ngIf="imageResult">
+        <h4>Result</h4>
+
+        <div *ngIf="imageResult.detections?.length; else noImageWeapon">
+          <div class="detection-list">
+            <div class="detection-item" *ngFor="let item of imageResult.detections">
+              <span>{{ item.class_name }}</span>
+              <span>{{ item.confidence }}</span>
+              <span class="threat-badge">{{ item.threat }}</span>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noImageWeapon>
+          <p class="no-detection">✅ No Weapon Detected</p>
+        </ng-template>
+
+        <div class="output-preview" *ngIf="imageResult.output_file">
+          <img [src]="getImageOutputUrl(imageResult.output_file)" alt="Processed image">
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-card">
+      <div class="card-head">
+        <div class="card-icon">🎥</div>
+        <div>
+          <h3>Video Detection</h3>
+          <p>Upload video for detection</p>
+        </div>
+      </div>
+
+      <label class="custom-file-btn">
+        Choose Video
+        <input type="file" accept="video/*" (change)="onVideoSelected($event)" hidden>
+      </label>
+
+      <div class="preview-box" *ngIf="videoPreview">
+        <video [src]="videoPreview" controls></video>
+      </div>
+
+      <button class="action-btn" (click)="detectVideo()" [disabled]="videoLoading">
+        {{ videoLoading ? 'Processing...' : 'Detect Video' }}
+      </button>
+
+      <p class="error-text" *ngIf="videoError">{{ videoError }}</p>
+
+      <div class="result-box" *ngIf="videoResult">
+        <h4>Result</h4>
+
+        <div *ngIf="videoResult.detections?.length; else noVideoWeapon">
+          <div class="detection-list">
+            <div class="detection-item" *ngFor="let item of videoResult.detections">
+              <span>{{ item.class_name }}</span>
+              <span>{{ item.confidence }}</span>
+              <span class="threat-badge">{{ item.threat }}</span>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noVideoWeapon>
+          <p class="no-detection">✅ No Weapon Detected</p>
+        </ng-template>
+
+        <div class="output-preview" *ngIf="videoResult.output_file">
+          <video [src]="getVideoOutputUrl(videoResult.output_file)" controls></video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="camera-card">
+    <div class="card-head">
+      <div class="card-icon">📷</div>
+      <div>
+        <h3>Live Camera</h3>
+        <p>Real-time detection</p>
+      </div>
+    </div>
+
+    <div class="camera-preview-box">
+      <video #cameraVideo autoplay playsinline muted></video>
+    </div>
+
+    <div class="camera-actions">
+      <button class="camera-btn start-btn" (click)="startCamera()" [disabled]="cameraStarted">Start</button>
+      <button class="camera-btn detect-btn" (click)="captureFrame()" [disabled]="!cameraStarted || cameraLoading">
+        {{ cameraLoading ? 'Detecting...' : 'Detect' }}
+      </button>
+      <button class="camera-btn stop-btn" (click)="stopCamera()" [disabled]="!cameraStarted">Stop</button>
+    </div>
+
+    <p class="error-text" *ngIf="cameraError">{{ cameraError }}</p>
+
+    <div class="result-box" *ngIf="cameraResult">
+      <h4>Camera Result</h4>
+
+      <div *ngIf="cameraResult.detections?.length; else noCameraWeapon">
+        <div class="detection-list">
+          <div class="detection-item" *ngFor="let item of cameraResult.detections">
+            <span>{{ item.class_name }}</span>
+            <span>{{ item.confidence }}</span>
+            <span class="threat-badge">{{ item.threat }}</span>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noCameraWeapon>
+        <p class="no-detection">✅ No Weapon Detected</p>
+      </ng-template>
+
+      <div class="output-preview" *ngIf="cameraResult.output_file">
+        <img [src]="getImageOutputUrl(cameraResult.output_file)" alt="Camera detection output">
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-actions">
+    <button class="history-btn" (click)="goToHistory()">View Upload History</button>
+  </div>
+
+</div>
