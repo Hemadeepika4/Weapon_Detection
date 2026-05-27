@@ -12,7 +12,6 @@ Original file is located at
 from google.colab import drive
 drive.mount('/content/drive')
 
-!rm -rf /content/drive/MyDrive/weapon_detection_final
 
 from ultralytics import YOLO
 import os
